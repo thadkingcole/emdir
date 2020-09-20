@@ -1,4 +1,4 @@
-# Employee Directory
+# EMployee DIRectory
 
 ![GitHub top language](https://img.shields.io/github/languages/top/thadkingcole/emdir)
 [![GitHub license](https://img.shields.io/github/license/thadkingcole/emdir)](LICENSE)
