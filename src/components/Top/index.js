@@ -1,14 +1,17 @@
 import React from "react";
-import { Jumbotron, Container } from "react-bootstrap";
-import Search from "../Search";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Container from "react-bootstrap/Container";
+import SearchBar from "../SearchBar";
 
-export default () => {
+function Top() {
   return (
     <Jumbotron fluid>
       <Container>
-        <h1>Employee Directory</h1>
-        <Search />
+        <h1>EMployee DIRectory</h1>
+        <SearchBar />
       </Container>
     </Jumbotron>
   );
-};
+}
+
+export default Top;
