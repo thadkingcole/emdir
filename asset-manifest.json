@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.js": "/github.io/emdir/static/js/main.4ce23023.chunk.js",
+    "main.js.map": "/github.io/emdir/static/js/main.4ce23023.chunk.js.map",
+    "runtime-main.js": "/github.io/emdir/static/js/runtime-main.31c44255.js",
+    "runtime-main.js.map": "/github.io/emdir/static/js/runtime-main.31c44255.js.map",
+    "static/css/2.d9ad5f5c.chunk.css": "/github.io/emdir/static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.1fc1e527.chunk.js": "/github.io/emdir/static/js/2.1fc1e527.chunk.js",
+    "static/js/2.1fc1e527.chunk.js.map": "/github.io/emdir/static/js/2.1fc1e527.chunk.js.map",
+    "index.html": "/github.io/emdir/index.html",
+    "precache-manifest.6a8d9713bd8e89010be646f7b28f7e13.js": "/github.io/emdir/precache-manifest.6a8d9713bd8e89010be646f7b28f7e13.js",
+    "service-worker.js": "/github.io/emdir/service-worker.js",
+    "static/css/2.d9ad5f5c.chunk.css.map": "/github.io/emdir/static/css/2.d9ad5f5c.chunk.css.map",
+    "static/js/2.1fc1e527.chunk.js.LICENSE.txt": "/github.io/emdir/static/js/2.1fc1e527.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.31c44255.js",
+    "static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.1fc1e527.chunk.js",
+    "static/js/main.4ce23023.chunk.js"
+  ]
+}
