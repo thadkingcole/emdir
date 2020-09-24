@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
 import API from "../../utils/API";
 
-function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 class Emdir extends Component {
   state = {
     users: [],
@@ -13,7 +9,7 @@ class Emdir extends Component {
 
   componentDidMount() {
     API.getUsers()
-      .then((res) => {  
+      .then((res) => {
         console.log(res.data.results);
         this.setState({ users: res.data.results });
       })
@@ -25,7 +21,7 @@ class Emdir extends Component {
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
-            <th>PIC</th>
+            <th>{/* blank cell */}</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
@@ -35,47 +31,32 @@ class Emdir extends Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <img src="https://placekitten.com/128/128" alt="place holder" />
-            </td>
-            <td>Mark Otto</td>
-            <td>011-899-9889</td>
-            <td>
-              <a href="markotto@fakemail.com">markotto@fakemail.com</a>
-            </td>
-            <td>Albany, NY</td>
-            <td>{getRndInteger(18, 65)}</td>
-            <td>Male</td>
-          </tr>
-          <tr>
-            <td>
-              <img src="https://placekitten.com/128/128" alt="place holder" />
-            </td>
-            <td>Juliet Thornton</td>
-            <td>999-119-7253</td>
-            <td>
-              <a href="julietthornton@fakemail.com">
-                julietthornton@fakemail.com
-              </a>
-            </td>
-            <td>Charleston, SC</td>
-            <td>{getRndInteger(18, 65)}</td>
-            <td>Female</td>
-          </tr>
-          <tr>
-            <td>
-              <img src="https://placekitten.com/128/128" alt="place holder" />
-            </td>
-            <td>Larry Bird</td>
-            <td>123-456-7890</td>
-            <td>
-              <a href="larrybird@fakemail.com">larrybird@fakemail.com</a>
-            </td>
-            <td>West Baden Springs, IN</td>
-            <td>{getRndInteger(18, 65)}</td>
-            <td>Male</td>
-          </tr>
+          {this.state.users.map((rando) => {
+            return (
+              <tr>
+                {/* picture */}
+                <td>
+                  <img src={rando.picture.large} alt={rando.name.last} />
+                </td>
+                {/* name */}
+                <td>{rando.name.first + " " + rando.name.last}</td>
+                {/* phone number(s) */}
+                <td>
+                  p: {rando.phone}
+                  <br />
+                  c: {rando.cell}
+                </td>
+                {/* email */}
+                <td>{rando.email}</td>
+                {/* location */}
+                <td>{rando.location.city + ", " + rando.location.state}</td>
+                {/* age */}
+                <td>{rando.dob.age}</td>
+                {/* gender */}
+                <td>{rando.gender}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     );
