@@ -21,8 +21,8 @@ function SearchBar() {
       >
         <Dropdown.Item href="#">Name</Dropdown.Item>
         <Dropdown.Item href="#">Location</Dropdown.Item>
-        <Dropdown.Item href="#">Age</Dropdown.Item>
-        <Dropdown.Item href="#">Gender</Dropdown.Item>
+        <Dropdown.Item href="#">Birthday</Dropdown.Item>
+        <Dropdown.Item href="#">Pronouns</Dropdown.Item>
       </DropdownButton>
     </InputGroup>
   );
