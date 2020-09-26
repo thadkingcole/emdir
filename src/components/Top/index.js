@@ -5,14 +5,23 @@ import SearchBar from "../SearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
 
+const styles = {
+  top: {
+    backgroundColor: "#77C01E",
+  },
+};
+
 function Top(props) {
   return (
-    <Jumbotron fluid>
+    <Jumbotron style={styles.top} fluid>
       <Container>
         <h1 className="display-4">
-          <FontAwesomeIcon icon={faAddressBook} /> Employee Directory
+          <FontAwesomeIcon icon={faAddressBook} /> EMployee DIRectory
         </h1>
-        <SearchBar userState={props.userState} onUserSearch={props.onUserSearch}/>
+        <SearchBar
+          userState={props.userState}
+          onUserSearch={props.onUserSearch}
+        />
       </Container>
     </Jumbotron>
   );

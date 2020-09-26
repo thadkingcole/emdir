@@ -93,7 +93,7 @@ class SearchBar extends Component {
       <InputGroup>
         <InputGroup.Prepend>
           {this.state.isSearching && (
-            <Button variant="outline-danger" onClick={this.clearSearch}>
+            <Button variant="danger" onClick={this.clearSearch}>
               Clear Search
             </Button>
           )}
@@ -111,7 +111,7 @@ class SearchBar extends Component {
 
         <DropdownButton
           as={InputGroup.Append}
-          variant="outline-primary"
+          variant="primary"
           title="Search For"
           id="emdir-field-select"
         >

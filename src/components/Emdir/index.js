@@ -8,6 +8,7 @@ import {
   faCaretUp,
   faCaretDown,
 } from "@fortawesome/free-solid-svg-icons";
+import "./styles.css";
 
 class Emdir extends Component {
   state = {
@@ -251,7 +252,7 @@ class Emdir extends Component {
 
   render() {
     return (
-      <Table striped bordered hover responsive size="sm">
+      <Table striped bordered hover responsive variant="dark" size="sm">
         <thead className="text-center">
           <tr onClick={this.tableHeaderClick}>
             <th id="name">Name {this.showNameSort()}</th>
