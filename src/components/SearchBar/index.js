@@ -1,31 +1,69 @@
-import React from "react";
+import React, { Component } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 
-function SearchBar() {
-  return (
-    <InputGroup>
-      <FormControl
-        placeholder="Search the directory"
-        aria-label="Search the directory"
-        aria-describedby="basic-addon2"
-      />
+class SearchBar extends Component {
+  state = {
+    searchTerm: "",
+  };
 
-      <DropdownButton
-        as={InputGroup.Append}
-        variant="outline-secondary"
-        title="Search For"
-        id="emdir-field-select"
-      >
-        <Dropdown.Item href="#">Name</Dropdown.Item>
-        <Dropdown.Item href="#">Location</Dropdown.Item>
-        <Dropdown.Item href="#">Birthday</Dropdown.Item>
-        <Dropdown.Item href="#">Pronouns</Dropdown.Item>
-      </DropdownButton>
-    </InputGroup>
-  );
+  handleInputChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
+
+  searchForName = () => {
+    console.log("searching for name ", this.state.searchTerm);
+  };
+
+  searchForLocation = () => {
+    console.log("searching for location ", this.state.searchTerm);
+  };
+
+  searchForBirthday = () => {
+    console.log("searching for birthday ", this.state.searchTerm);
+  };
+
+  searchForPronoun = () => {
+    console.log("searching for pronoun ", this.state.searchTerm);
+  };
+
+  render() {
+    return (
+      <InputGroup>
+        <FormControl
+          placeholder="Search the directory"
+          aria-label="Search the directory"
+          aria-describedby="basic-addon2"
+          as="input"
+          onChange={this.handleInputChange}
+          name="searchTerm"
+          value={this.state.searchTerm}
+          type="text"
+        />
+
+        <DropdownButton
+          as={InputGroup.Append}
+          variant="outline-secondary"
+          title="Search For"
+          id="emdir-field-select"
+        >
+          <Dropdown.Item onSelect={this.searchForName}>Name</Dropdown.Item>
+          <Dropdown.Item onSelect={this.searchForLocation}>
+            Location
+          </Dropdown.Item>
+          <Dropdown.Item onSelect={this.searchForBirthday}>
+            Birthday
+          </Dropdown.Item>
+          <Dropdown.Item onSelect={this.searchForPronoun}>
+            Pronouns
+          </Dropdown.Item>
+        </DropdownButton>
+      </InputGroup>
+    );
+  }
 }
 
 export default SearchBar;
