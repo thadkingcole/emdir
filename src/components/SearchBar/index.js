@@ -29,7 +29,7 @@ class SearchBar extends Component {
   };
 
   searchForLocation = () => {
-    console.log("searching for location ", this.state.searchTerm);
+    // console.log("searching for location ", this.state.searchTerm);
     const newUsers = this.props.users.filter((user) => {
       return (
         user.location.city
@@ -44,10 +44,15 @@ class SearchBar extends Component {
   };
 
   searchForBirthday = () => {
-    console.log("searching for birthday ", this.state.searchTerm);
+    // console.log("searching for birthday ", this.state.searchTerm);
+    const newUsers = this.props.users.filter((user) => {
+      const birthday = new Date(user.dob.date).toLocaleDateString();
+      return birthday.includes(this.state.searchTerm);
+    });
+    this.props.onUserSearch(newUsers);
   };
 
-  searchForPronoun = () => {
+  searchForPronouns = () => {
     console.log("searching for pronoun ", this.state.searchTerm);
   };
 
@@ -78,7 +83,7 @@ class SearchBar extends Component {
           <Dropdown.Item onSelect={this.searchForBirthday}>
             Birthday
           </Dropdown.Item>
-          <Dropdown.Item onSelect={this.searchForPronoun}>
+          <Dropdown.Item onSelect={this.searchForPronouns}>
             Pronouns
           </Dropdown.Item>
         </DropdownButton>
