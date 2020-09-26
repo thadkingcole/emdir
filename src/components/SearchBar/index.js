@@ -13,7 +13,7 @@ class SearchBar extends Component {
   };
 
   searchForName = () => {
-    console.log("searching for name ", this.state.searchTerm);
+    // console.log("searching for name ", this.state.searchTerm);
     // filter name based on first name & last name
     const newUsers = this.props.users.filter((user) => {
       return (
@@ -30,6 +30,17 @@ class SearchBar extends Component {
 
   searchForLocation = () => {
     console.log("searching for location ", this.state.searchTerm);
+    const newUsers = this.props.users.filter((user) => {
+      return (
+        user.location.city
+          .toLowerCase()
+          .includes(this.state.searchTerm.toLowerCase()) ||
+        user.location.state
+          .toLowerCase()
+          .includes(this.state.searchTerm.toLowerCase())
+      );
+    });
+    this.props.onUserSearch(newUsers);
   };
 
   searchForBirthday = () => {
@@ -41,7 +52,6 @@ class SearchBar extends Component {
   };
 
   render() {
-    // console.log(this.props.users[0])
     return (
       <InputGroup>
         <FormControl
