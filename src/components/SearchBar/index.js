@@ -17,8 +17,12 @@ class SearchBar extends Component {
     // filter name based on first name & last name
     const newUsers = this.props.users.filter((user) => {
       return (
-        user.name.first.toLowerCase() === this.state.searchTerm.toLowerCase() ||
-        user.name.last.toLowerCase() === this.state.searchTerm.toLowerCase()
+        user.name.first
+          .toLowerCase()
+          .includes(this.state.searchTerm.toLowerCase()) ||
+        user.name.last
+          .toLowerCase()
+          .includes(this.state.searchTerm.toLowerCase())
       );
     });
     this.props.onUserSearch(newUsers);
