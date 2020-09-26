@@ -13,8 +13,7 @@ class SearchBar extends Component {
   };
 
   searchForName = () => {
-    // console.log("searching for name ", this.state.searchTerm);
-    // filter name based on first name & last name
+    // filter name based on first or last name
     const newUsers = this.props.users.filter((user) => {
       return (
         user.name.first
@@ -29,7 +28,7 @@ class SearchBar extends Component {
   };
 
   searchForLocation = () => {
-    // console.log("searching for location ", this.state.searchTerm);
+    // filter location based on city or state
     const newUsers = this.props.users.filter((user) => {
       return (
         user.location.city
@@ -44,7 +43,7 @@ class SearchBar extends Component {
   };
 
   searchForBirthday = () => {
-    // console.log("searching for birthday ", this.state.searchTerm);
+    // filter birthday based on any portion of the date matching search term
     const newUsers = this.props.users.filter((user) => {
       const birthday = new Date(user.dob.date).toLocaleDateString();
       return birthday.includes(this.state.searchTerm);
@@ -53,7 +52,23 @@ class SearchBar extends Component {
   };
 
   searchForPronouns = () => {
-    console.log("searching for pronoun ", this.state.searchTerm);
+    // filter pronouns based on partial match he/him or she/her
+    const newUsers = this.props.users.filter((user) => {
+      if (
+        this.state.searchTerm.toLowerCase().includes("she") ||
+        this.state.searchTerm.toLowerCase().includes("her")
+      ) {
+        return user.gender === "female";
+      }
+      if (
+        this.state.searchTerm.toLowerCase() === "he" || // she includes he
+        this.state.searchTerm.toLowerCase().includes("him")
+      ) {
+        return user.gender === "male";
+      }
+      return false;
+    });
+    this.props.onUserSearch(newUsers);
   };
 
   render() {
