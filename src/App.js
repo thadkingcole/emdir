@@ -7,7 +7,7 @@ import API from "./utils/API";
 class App extends Component {
   state = {
     users: [],
-    allUsers: []
+    allUsers: [],
   };
 
   componentDidMount() {
@@ -23,14 +23,18 @@ class App extends Component {
 
   onUserSearch = (newUsers) => {
     this.setState({ users: newUsers });
-  }
+  };
+
+  onUserSort = (sortedUsers) => {
+    this.setState({ users: sortedUsers });
+  };
 
   render() {
     return (
       <div>
         <Top userState={this.state} onUserSearch={this.onUserSearch} />
         <Container>
-          <Emdir users={this.state.users} />
+          <Emdir users={this.state.users} onUserSort={this.onUserSort} />
         </Container>
       </div>
     );

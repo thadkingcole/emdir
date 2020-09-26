@@ -8,15 +8,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 class Emdir extends Component {
-  // sortBy = (headerName) {
+  sortByName = () => {
+    const sortedUsers = this.props.users.sort((a, b) =>
+      a.name.last.toLowerCase() > b.name.last.toLowerCase() ? 1 : -1
+    );
 
-  // }
+    this.props.onUserSort(sortedUsers);
+  };
 
   tableHeaderClick = (event) => {
-    console.log(event.target.id);
     switch (event.target.id) {
       case "name":
-        console.log("you clicked name");
+        this.sortByName();
         break;
 
       case "contact":
