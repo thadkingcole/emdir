@@ -5,15 +5,72 @@ import {
   faPhoneSquareAlt,
   faMobileAlt,
   faEnvelopeOpenText,
+  faCaretUp,
+  faCaretDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 class Emdir extends Component {
-  sortByName = () => {
-    const sortedUsers = this.props.users.sort((a, b) =>
-      a.name.last.toLowerCase() > b.name.last.toLowerCase() ? 1 : -1
-    );
+  state = {
+    nameSortIndex: 0,
+    nameSort: "",
+    locationSortIndex: 0,
+    birthdaySortIndex: 0,
+    pronounsSortIndex: 0,
+  };
 
-    this.props.onUserSort(sortedUsers);
+  sortByName = () => {
+    // cycle thru first asc, first desc, last asc, last desc, default order
+    const sortedUsers = this.props.userState.users;
+    switch (this.state.nameSortIndex) {
+      case 0:
+        // sort by first name ascending
+        sortedUsers.sort((a, b) =>
+          a.name.first.toLowerCase() > b.name.first.toLowerCase() ? 1 : -1
+        );
+        this.setState({
+          nameSort: "firstAsc",
+          nameSortIndex: this.state.nameSortIndex + 1,
+        });
+        this.props.onUserSort(sortedUsers);
+        break;
+
+      case 1:
+        // sort by first name descending
+        sortedUsers.sort((a, b) =>
+          a.name.first.toLowerCase() > b.name.first.toLowerCase() ? -1 : 1
+        );
+        this.setState({
+          nameSort: "firstDesc",
+          nameSortIndex: this.state.nameSortIndex + 1,
+        });
+        this.props.onUserSort(sortedUsers);
+        break;
+
+      case 2:
+        // sort by last name ascending
+        sortedUsers.sort((a, b) =>
+          a.name.last.toLowerCase() > b.name.last.toLowerCase() ? 1 : -1
+        );
+        this.setState({
+          nameSort: "lastAsc",
+          nameSortIndex: this.state.nameSortIndex + 1,
+        });
+        this.props.onUserSort(sortedUsers);
+        break;
+
+      case 3:
+        // sort by last name descending
+        sortedUsers.sort((a, b) =>
+          a.name.last.toLowerCase() > b.name.last.toLowerCase() ? -1 : 1
+        );
+        this.setState({ nameSort: "lastDesc", nameSortIndex: 0 });
+        this.props.onUserSort(sortedUsers);
+        break;
+
+      default:
+        this.setState({ nameSortIndex: 0 });
+        break;
+    }
   };
 
   tableHeaderClick = (event) => {
@@ -43,12 +100,43 @@ class Emdir extends Component {
     }
   };
 
+  showNameSort = () => {
+    switch (this.state.nameSort) {
+      case "firstAsc":
+        return (
+          <>
+            | First <FontAwesomeIcon icon={faCaretUp} />
+          </>
+        );
+      case "firstDesc":
+        return (
+          <>
+            | First <FontAwesomeIcon icon={faCaretDown} />
+          </>
+        );
+      case "lastAsc":
+        return (
+          <>
+            | Last <FontAwesomeIcon icon={faCaretUp} />
+          </>
+        );
+      case "lastDesc":
+        return (
+          <>
+            | Last <FontAwesomeIcon icon={faCaretDown} />
+          </>
+        );
+      default:
+        return <span></span>;
+    }
+  };
+
   render() {
     return (
       <Table striped bordered hover responsive size="sm">
         <thead className="text-center">
           <tr onClick={this.tableHeaderClick}>
-            <th id="name">Name</th>
+            <th id="name">Name {this.showNameSort()}</th>
             <th id="contact">Contact</th>
             <th id="location">Location</th>
             <th id="birthday">Birthday</th>
@@ -56,28 +144,28 @@ class Emdir extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.users.map((rando) => {
+          {this.props.userState.users.map((user) => {
             return (
-              <tr key={rando.id.value}>
+              <tr key={user.id.value}>
                 <td className="text-center">
-                  <img src={rando.picture.large} alt={rando.name.last} />
+                  <img src={user.picture.large} alt={user.name.last} />
                   <br />
-                  {rando.name.first} {rando.name.last}
+                  {user.name.first} {user.name.last}
                 </td>
                 <td>
                   <FontAwesomeIcon icon={faPhoneSquareAlt} size="2x" />{" "}
-                  {rando.phone}
+                  {user.phone}
                   <br />
-                  <FontAwesomeIcon icon={faMobileAlt} size="2x" /> {rando.cell}
+                  <FontAwesomeIcon icon={faMobileAlt} size="2x" /> {user.cell}
                   <br />
                   <FontAwesomeIcon icon={faEnvelopeOpenText} size="2x" />{" "}
-                  {rando.email}
+                  {user.email}
                 </td>
                 <td>
-                  {rando.location.city}, {rando.location.state}
+                  {user.location.city}, {user.location.state}
                 </td>
-                <td>{new Date(rando.dob.date).toLocaleDateString()}</td>
-                <td>{rando.gender === "male" ? "he/him" : "she/her"}</td>
+                <td>{new Date(user.dob.date).toLocaleDateString()}</td>
+                <td>{user.gender === "male" ? "he/him" : "she/her"}</td>
               </tr>
             );
           })}

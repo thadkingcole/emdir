@@ -21,20 +21,16 @@ class App extends Component {
       .catch((err) => console.log(err));
   }
 
-  onUserSearch = (newUsers) => {
+  onUsersChange = (newUsers) => {
     this.setState({ users: newUsers });
-  };
-
-  onUserSort = (sortedUsers) => {
-    this.setState({ users: sortedUsers });
   };
 
   render() {
     return (
       <div>
-        <Top userState={this.state} onUserSearch={this.onUserSearch} />
+        <Top userState={this.state} onUserSearch={this.onUsersChange} />
         <Container>
-          <Emdir users={this.state.users} onUserSort={this.onUserSort} />
+          <Emdir userState={this.state} onUserSort={this.onUsersChange} />
         </Container>
       </div>
     );
