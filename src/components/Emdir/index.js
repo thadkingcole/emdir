@@ -11,9 +11,8 @@ import {
 
 class Emdir extends Component {
   state = {
-    nameSortIndex: 0,
     nameSort: "",
-    locationSortIndex: 0,
+    locationSort: "",
     birthdaySortIndex: 0,
     pronounsSortIndex: 0,
   };
@@ -21,54 +20,99 @@ class Emdir extends Component {
   sortByName = () => {
     // cycle thru first asc, first desc, last asc, last desc, default order
     const sortedUsers = this.props.userState.users;
-    switch (this.state.nameSortIndex) {
-      case 0:
+    switch (this.state.nameSort) {
+      case "":
+      case "lastDesc":
         // sort by first name ascending
         sortedUsers.sort((a, b) =>
           a.name.first.toLowerCase() > b.name.first.toLowerCase() ? 1 : -1
         );
-        this.setState({
-          nameSort: "firstAsc",
-          nameSortIndex: this.state.nameSortIndex + 1,
-        });
+        this.setState({ nameSort: "firstAsc" });
         this.props.onUserSort(sortedUsers);
         break;
 
-      case 1:
+      case "firstAsc":
         // sort by first name descending
         sortedUsers.sort((a, b) =>
           a.name.first.toLowerCase() > b.name.first.toLowerCase() ? -1 : 1
         );
-        this.setState({
-          nameSort: "firstDesc",
-          nameSortIndex: this.state.nameSortIndex + 1,
-        });
+        this.setState({ nameSort: "firstDesc" });
         this.props.onUserSort(sortedUsers);
         break;
 
-      case 2:
+      case "firstDesc":
         // sort by last name ascending
         sortedUsers.sort((a, b) =>
           a.name.last.toLowerCase() > b.name.last.toLowerCase() ? 1 : -1
         );
-        this.setState({
-          nameSort: "lastAsc",
-          nameSortIndex: this.state.nameSortIndex + 1,
-        });
+        this.setState({ nameSort: "lastAsc" });
         this.props.onUserSort(sortedUsers);
         break;
 
-      case 3:
+      case "lastAsc":
         // sort by last name descending
         sortedUsers.sort((a, b) =>
           a.name.last.toLowerCase() > b.name.last.toLowerCase() ? -1 : 1
         );
-        this.setState({ nameSort: "lastDesc", nameSortIndex: 0 });
+        this.setState({ nameSort: "lastDesc" });
         this.props.onUserSort(sortedUsers);
         break;
 
       default:
-        this.setState({ nameSortIndex: 0 });
+        // default to empty string (no sort)
+        this.setState({ nameSort: "" });
+        break;
+    }
+  };
+
+  sortByLocation = () => {
+    // cycle thru city asc, city desc, state asc, state desc, default order
+    const sortedUsers = this.props.userState.users;
+    switch (this.state.locationSort) {
+      case "":
+      case "stateDesc":
+        // sort by city ascending
+        sortedUsers.sort((a, b) =>
+          a.location.city.toLowerCase() > b.location.city.toLowerCase() ? 1 : -1
+        );
+        this.setState({ locationSort: "cityAsc" });
+        this.props.onUserSort(sortedUsers);
+        break;
+
+      case "cityAsc":
+        // sort by city descending
+        sortedUsers.sort((a, b) =>
+          a.location.city.toLowerCase() > b.location.city.toLowerCase() ? -1 : 1
+        );
+        this.setState({ locationSort: "cityDesc" });
+        this.props.onUserSort(sortedUsers);
+        break;
+
+      case "cityDesc":
+        // sort by state ascending
+        sortedUsers.sort((a, b) =>
+          a.location.state.toLowerCase() > b.location.state.toLowerCase()
+            ? 1
+            : -1
+        );
+        this.setState({ locationSort: "stateAsc" });
+        this.props.onUserSort(sortedUsers);
+        break;
+
+      case "stateAsc":
+        // sort by state descending
+        sortedUsers.sort((a, b) =>
+          a.location.state.toLowerCase() > b.location.state.toLowerCase()
+            ? -1
+            : 1
+        );
+        this.setState({ locationSort: "stateDesc" });
+        this.props.onUserSort(sortedUsers);
+        break;
+
+      default:
+        // default to empty string (no sort)
+        this.setState({ locationSort: "" });
         break;
     }
   };
@@ -80,24 +124,22 @@ class Emdir extends Component {
         break;
 
       case "contact":
-        console.log("you clicked contact");
         break;
 
       case "location":
-        console.log("you clicked location");
+        this.sortByLocation();
         break;
 
       case "birthday":
-        console.log("you clicked Birthday");
         break;
 
       case "pronouns":
-        console.log("you clicked Pronouns");
         break;
 
       default:
         break;
     }
+    console.log(`you clicked ${event.target.id}`);
   };
 
   showNameSort = () => {
@@ -131,6 +173,37 @@ class Emdir extends Component {
     }
   };
 
+  showLocationSort = () => {
+    switch (this.state.locationSort) {
+      case "cityAsc":
+        return (
+          <>
+            | City <FontAwesomeIcon icon={faCaretUp} />
+          </>
+        );
+      case "cityDesc":
+        return (
+          <>
+            | City <FontAwesomeIcon icon={faCaretDown} />
+          </>
+        );
+      case "stateAsc":
+        return (
+          <>
+            | State <FontAwesomeIcon icon={faCaretUp} />
+          </>
+        );
+      case "stateDesc":
+        return (
+          <>
+            | State <FontAwesomeIcon icon={faCaretDown} />
+          </>
+        );
+      default:
+        return <span></span>;
+    }
+  };
+
   render() {
     return (
       <Table striped bordered hover responsive size="sm">
@@ -138,7 +211,7 @@ class Emdir extends Component {
           <tr onClick={this.tableHeaderClick}>
             <th id="name">Name {this.showNameSort()}</th>
             <th id="contact">Contact</th>
-            <th id="location">Location</th>
+            <th id="location">Location {this.showLocationSort()}</th>
             <th id="birthday">Birthday</th>
             <th id="pronouns">Pronouns</th>
           </tr>
