@@ -5,14 +5,14 @@ import SearchBar from "../SearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
 
-function Top() {
+function Top(props) {
   return (
     <Jumbotron fluid>
       <Container>
         <h1 className="display-4">
           <FontAwesomeIcon icon={faAddressBook} /> Employee Directory
         </h1>
-        <SearchBar />
+        <SearchBar users={props.users} onUserSearch={props.onUserSearch}/>
       </Container>
     </Jumbotron>
   );

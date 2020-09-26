@@ -14,6 +14,14 @@ class SearchBar extends Component {
 
   searchForName = () => {
     console.log("searching for name ", this.state.searchTerm);
+    // filter name based on first name & last name
+    const newUsers = this.props.users.filter((user) => {
+      return (
+        user.name.first.toLowerCase() === this.state.searchTerm.toLowerCase() ||
+        user.name.last.toLowerCase() === this.state.searchTerm.toLowerCase()
+      );
+    });
+    this.props.onUserSearch(newUsers);
   };
 
   searchForLocation = () => {
@@ -29,6 +37,7 @@ class SearchBar extends Component {
   };
 
   render() {
+    // console.log(this.props.users[0])
     return (
       <InputGroup>
         <FormControl

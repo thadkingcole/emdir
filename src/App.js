@@ -17,12 +17,16 @@ class App extends Component {
       .catch((err) => console.log(err));
   }
 
+  onUserSearch = (newUsers) => {
+    this.setState({ users: newUsers });
+  }
+
   render() {
     return (
       <div>
-        <Top />
+        <Top users={this.state.users} onUserSearch={this.onUserSearch} />
         <Container>
-          <Emdir users={this.state.users}/>
+          <Emdir users={this.state.users} />
         </Container>
       </div>
     );
