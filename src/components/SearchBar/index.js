@@ -5,9 +5,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 
 class SearchBar extends Component {
-  state = {
-    searchTerm: "",
-  };
+  state = { searchTerm: "" };
 
   handleInputChange = (event) => {
     const { name, value } = event.target;

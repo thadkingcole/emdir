@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import Table from "react-bootstrap/Table";
-import API from "../../utils/API";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPhoneSquareAlt,
@@ -8,20 +7,7 @@ import {
   faEnvelopeOpenText,
 } from "@fortawesome/free-solid-svg-icons";
 
-class Emdir extends Component {
-  state = {
-    users: [],
-  };
-
-  componentDidMount() {
-    API.getUsers()
-      .then((res) => {
-        this.setState({ users: res.data.results });
-      })
-      .catch((err) => console.log(err));
-  }
-
-  render() {
+function Emdir(props) {
     return (
       <Table striped bordered hover responsive size="sm">
         <thead className="text-center">
@@ -34,7 +20,7 @@ class Emdir extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.users.map((rando) => {
+          {props.users.map((rando) => {
             return (
               <tr key={rando.id.value}>
                 <td className="text-center">
@@ -62,7 +48,6 @@ class Emdir extends Component {
         </tbody>
       </Table>
     );
-  }
 }
 
 export default Emdir;
