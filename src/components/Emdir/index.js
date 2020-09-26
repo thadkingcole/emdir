@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,11 +7,16 @@ import {
   faEnvelopeOpenText,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Emdir(props) {
+class Emdir extends Component {
+  handleClick = (event) => {
+    console.log(event.target);
+  }
+
+  render() {
     return (
       <Table striped bordered hover responsive size="sm">
         <thead className="text-center">
-          <tr>
+          <tr onClick={this.handleClick}>
             <th>Name</th>
             <th>Contact</th>
             <th>Location</th>
@@ -20,7 +25,7 @@ function Emdir(props) {
           </tr>
         </thead>
         <tbody>
-          {props.users.map((rando) => {
+          {this.props.users.map((rando) => {
             return (
               <tr key={rando.id.value}>
                 <td className="text-center">
@@ -48,6 +53,7 @@ function Emdir(props) {
         </tbody>
       </Table>
     );
+  }
 }
 
 export default Emdir;
