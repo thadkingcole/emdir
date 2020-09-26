@@ -83,7 +83,10 @@ class SearchBar extends Component {
   clearSearch = () => {
     console.log("you clicked clearSearch");
     this.props.onUserSearch(this.props.userState.allUsers);
-    this.setState({ isSearching: false });
+    this.setState({
+      isSearching: false,
+      searchTerm: "",
+    });
   };
 
   render() {
