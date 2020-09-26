@@ -8,20 +8,48 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 class Emdir extends Component {
-  handleClick = (event) => {
-    console.log(event.target);
-  }
+  // sortBy = (headerName) {
+
+  // }
+
+  tableHeaderClick = (event) => {
+    console.log(event.target.id);
+    switch (event.target.id) {
+      case "name":
+        console.log("you clicked name");
+        break;
+
+      case "contact":
+        console.log("you clicked contact");
+        break;
+
+      case "location":
+        console.log("you clicked location");
+        break;
+
+      case "birthday":
+        console.log("you clicked Birthday");
+        break;
+
+      case "pronouns":
+        console.log("you clicked Pronouns");
+        break;
+
+      default:
+        break;
+    }
+  };
 
   render() {
     return (
       <Table striped bordered hover responsive size="sm">
         <thead className="text-center">
-          <tr onClick={this.handleClick}>
-            <th>Name</th>
-            <th>Contact</th>
-            <th>Location</th>
-            <th>Birthday</th>
-            <th>Pronouns</th>
+          <tr onClick={this.tableHeaderClick}>
+            <th id="name">Name</th>
+            <th id="contact">Contact</th>
+            <th id="location">Location</th>
+            <th id="birthday">Birthday</th>
+            <th id="pronouns">Pronouns</th>
           </tr>
         </thead>
         <tbody>
