@@ -13,8 +13,7 @@ class Emdir extends Component {
   state = {
     nameSort: "",
     locationSort: "",
-    birthdaySortIndex: 0,
-    pronounsSortIndex: 0,
+    birthdaySort: "",
   };
 
   sortByName = () => {
@@ -117,6 +116,36 @@ class Emdir extends Component {
     }
   };
 
+  sortByBirthday = () => {
+    // cycle thru birthday asc, birthday desc, default order
+    const sortedUsers = this.props.userState.users;
+    switch (this.state.birthdaySort) {
+      case "":
+      case "birthdayDesc":
+        // sort by birthday ascending
+        sortedUsers.sort((a, b) =>
+          new Date(a.dob.date) > new Date(b.dob.date) ? 1 : -1
+        );
+        this.setState({ birthdaySort: "birthdayAsc" });
+        this.props.onUserSort(sortedUsers);
+        break;
+
+      case "birthdayAsc":
+        // sort by birthday descending
+        sortedUsers.sort((a, b) =>
+          new Date(a.dob.date) > new Date(b.dob.date) ? -1 : 1
+        );
+        this.setState({ birthdaySort: "birthdayDesc" });
+        this.props.onUserSort(sortedUsers);
+        break;
+
+      default:
+        // default to empty string (no sort)
+        this.setState({ birthdaySort: "" });
+        break;
+    }
+  };
+
   tableHeaderClick = (event) => {
     switch (event.target.id) {
       case "name":
@@ -124,6 +153,7 @@ class Emdir extends Component {
         break;
 
       case "contact":
+        // electing not to sort contact info, but could be added in the future
         break;
 
       case "location":
@@ -131,15 +161,17 @@ class Emdir extends Component {
         break;
 
       case "birthday":
+        this.sortByBirthday();
         break;
 
       case "pronouns":
+        // electing not to sort pronouns, but could be added in the future
         break;
 
       default:
+        // do nothing
         break;
     }
-    console.log(`you clicked ${event.target.id}`);
   };
 
   showNameSort = () => {
@@ -204,6 +236,19 @@ class Emdir extends Component {
     }
   };
 
+  showBirthdaySort = () => {
+    switch (this.state.birthdaySort) {
+      case "birthdayAsc":
+        return <FontAwesomeIcon icon={faCaretUp} />;
+
+      case "birthdayDesc":
+        return <FontAwesomeIcon icon={faCaretDown} />;
+
+      default:
+        return <span></span>;
+    }
+  };
+
   render() {
     return (
       <Table striped bordered hover responsive size="sm">
@@ -212,7 +257,7 @@ class Emdir extends Component {
             <th id="name">Name {this.showNameSort()}</th>
             <th id="contact">Contact</th>
             <th id="location">Location {this.showLocationSort()}</th>
-            <th id="birthday">Birthday</th>
+            <th id="birthday">Birthday {this.showBirthdaySort()}</th>
             <th id="pronouns">Pronouns</th>
           </tr>
         </thead>
