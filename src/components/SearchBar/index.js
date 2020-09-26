@@ -3,9 +3,13 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+import Button from "react-bootstrap/Button";
 
 class SearchBar extends Component {
-  state = { searchTerm: "" };
+  state = {
+    searchTerm: "",
+    isSearching: false,
+  };
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -13,6 +17,7 @@ class SearchBar extends Component {
   };
 
   searchForName = () => {
+    this.setState({ isSearching: true });
     // filter name based on first or last name
     const newUsers = this.props.users.filter((user) => {
       return (
@@ -28,6 +33,7 @@ class SearchBar extends Component {
   };
 
   searchForLocation = () => {
+    this.setState({ isSearching: true });
     // filter location based on city or state
     const newUsers = this.props.users.filter((user) => {
       return (
@@ -43,6 +49,7 @@ class SearchBar extends Component {
   };
 
   searchForBirthday = () => {
+    this.setState({ isSearching: true });
     // filter birthday based on any portion of the date matching search term
     const newUsers = this.props.users.filter((user) => {
       const birthday = new Date(user.dob.date).toLocaleDateString();
@@ -52,6 +59,7 @@ class SearchBar extends Component {
   };
 
   searchForPronouns = () => {
+    this.setState({ isSearching: true });
     // filter pronouns based on partial match he/him or she/her
     const newUsers = this.props.users.filter((user) => {
       if (
@@ -71,9 +79,20 @@ class SearchBar extends Component {
     this.props.onUserSearch(newUsers);
   };
 
+  clearSearch = () => {
+    console.log("you clicked clearSearch");
+  };
+
   render() {
     return (
       <InputGroup>
+        <InputGroup.Prepend>
+          {this.state.isSearching && (
+            <Button variant="outline-danger" onClick={this.clearSearch}>
+              Clear Search
+            </Button>
+          )}
+        </InputGroup.Prepend>
         <FormControl
           placeholder="Search the directory"
           aria-label="Search the directory"
@@ -87,7 +106,7 @@ class SearchBar extends Component {
 
         <DropdownButton
           as={InputGroup.Append}
-          variant="outline-secondary"
+          variant="outline-primary"
           title="Search For"
           id="emdir-field-select"
         >
