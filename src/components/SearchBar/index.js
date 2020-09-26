@@ -9,6 +9,7 @@ class SearchBar extends Component {
   state = {
     searchTerm: "",
     isSearching: false,
+    queries: [],
   };
 
   handleInputChange = (event) => {
@@ -19,7 +20,7 @@ class SearchBar extends Component {
   searchForName = () => {
     this.setState({ isSearching: true });
     // filter name based on first or last name
-    const newUsers = this.props.users.filter((user) => {
+    const newUsers = this.props.userState.users.filter((user) => {
       return (
         user.name.first
           .toLowerCase()
@@ -35,7 +36,7 @@ class SearchBar extends Component {
   searchForLocation = () => {
     this.setState({ isSearching: true });
     // filter location based on city or state
-    const newUsers = this.props.users.filter((user) => {
+    const newUsers = this.props.userState.users.filter((user) => {
       return (
         user.location.city
           .toLowerCase()
@@ -51,7 +52,7 @@ class SearchBar extends Component {
   searchForBirthday = () => {
     this.setState({ isSearching: true });
     // filter birthday based on any portion of the date matching search term
-    const newUsers = this.props.users.filter((user) => {
+    const newUsers = this.props.userState.users.filter((user) => {
       const birthday = new Date(user.dob.date).toLocaleDateString();
       return birthday.includes(this.state.searchTerm);
     });
@@ -61,7 +62,7 @@ class SearchBar extends Component {
   searchForPronouns = () => {
     this.setState({ isSearching: true });
     // filter pronouns based on partial match he/him or she/her
-    const newUsers = this.props.users.filter((user) => {
+    const newUsers = this.props.userState.users.filter((user) => {
       if (
         this.state.searchTerm.toLowerCase().includes("she") ||
         this.state.searchTerm.toLowerCase().includes("her")
@@ -81,6 +82,8 @@ class SearchBar extends Component {
 
   clearSearch = () => {
     console.log("you clicked clearSearch");
+    this.props.onUserSearch(this.props.userState.allUsers);
+    this.setState({ isSearching: false });
   };
 
   render() {

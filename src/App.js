@@ -7,12 +7,16 @@ import API from "./utils/API";
 class App extends Component {
   state = {
     users: [],
+    allUsers: []
   };
 
   componentDidMount() {
     API.getUsers()
       .then((res) => {
         this.setState({ users: res.data.results });
+        if (!this.state.allUsers.length) {
+          this.setState({ allUsers: res.data.results });
+        }
       })
       .catch((err) => console.log(err));
   }
@@ -24,7 +28,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Top users={this.state.users} onUserSearch={this.onUserSearch} />
+        <Top userState={this.state} onUserSearch={this.onUserSearch} />
         <Container>
           <Emdir users={this.state.users} />
         </Container>

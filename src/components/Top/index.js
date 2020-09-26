@@ -12,7 +12,7 @@ function Top(props) {
         <h1 className="display-4">
           <FontAwesomeIcon icon={faAddressBook} /> Employee Directory
         </h1>
-        <SearchBar users={props.users} onUserSearch={props.onUserSearch}/>
+        <SearchBar userState={props.userState} onUserSearch={props.onUserSearch}/>
       </Container>
     </Jumbotron>
   );
