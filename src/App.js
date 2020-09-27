@@ -4,10 +4,6 @@ import Container from "react-bootstrap/Container";
 import Emdir from "./components/Emdir";
 import API from "./utils/API";
 
-const styles = {
-  backgroundColor: "black",
-};
-
 class App extends Component {
   state = {
     users: [],
@@ -31,12 +27,12 @@ class App extends Component {
 
   render() {
     return (
-      <div style={styles}>
+      <>
         <Top userState={this.state} onUserSearch={this.onUsersChange} />
         <Container>
           <Emdir userState={this.state} onUserSort={this.onUsersChange} />
         </Container>
-      </div>
+      </>
     );
   }
 }

@@ -294,6 +294,9 @@ class Emdir extends Component {
             })}
           </tbody>
         </Table>
+        {!this.props.userState.users.length && (
+          <p className="text-light">Your search produced no results</p>
+        )}
       </>
     );
   }

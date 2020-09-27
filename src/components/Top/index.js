@@ -6,14 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
 
 const styles = {
-  top: {
-    backgroundColor: "#77C01E",
-  },
+  backgroundColor: "#77C01E",
 };
 
 function Top(props) {
   return (
-    <Jumbotron style={styles.top} fluid>
+    <Jumbotron style={styles} fluid>
       <Container>
         <h1 className="display-4">
           <FontAwesomeIcon icon={faAddressBook} /> EMployee DIRectory
