@@ -252,44 +252,49 @@ class Emdir extends Component {
 
   render() {
     return (
-      <Table striped bordered hover responsive variant="dark" size="sm">
-        <thead className="text-center">
-          <tr onClick={this.tableHeaderClick}>
-            <th id="name">Name {this.showNameSort()}</th>
-            <th id="contact">Contact</th>
-            <th id="location">Location {this.showLocationSort()}</th>
-            <th id="birthday">Birthday {this.showBirthdaySort()}</th>
-            <th id="pronouns">Pronouns</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.userState.users.map((user) => {
-            return (
-              <tr key={user.id.value}>
-                <td className="text-center">
-                  <img src={user.picture.large} alt={user.name.last} />
-                  <br />
-                  {user.name.first} {user.name.last}
-                </td>
-                <td>
-                  <FontAwesomeIcon icon={faPhoneSquareAlt} size="2x" />{" "}
-                  {user.phone}
-                  <br />
-                  <FontAwesomeIcon icon={faMobileAlt} size="2x" /> {user.cell}
-                  <br />
-                  <FontAwesomeIcon icon={faEnvelopeOpenText} size="2x" />{" "}
-                  {user.email}
-                </td>
-                <td>
-                  {user.location.city}, {user.location.state}
-                </td>
-                <td>{new Date(user.dob.date).toLocaleDateString()}</td>
-                <td>{user.gender === "male" ? "he/him" : "she/her"}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      <>
+        <p className="text-light">
+          Click a table header to cycle through available sorts
+        </p>
+        <Table striped bordered hover responsive variant="dark" size="sm">
+          <thead className="text-center">
+            <tr onClick={this.tableHeaderClick}>
+              <th id="name">Name {this.showNameSort()}</th>
+              <th id="contact">Contact</th>
+              <th id="location">Location {this.showLocationSort()}</th>
+              <th id="birthday">Birthday {this.showBirthdaySort()}</th>
+              <th id="pronouns">Pronouns</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.userState.users.map((user) => {
+              return (
+                <tr key={user.id.value}>
+                  <td className="text-center">
+                    <img src={user.picture.large} alt={user.name.last} />
+                    <br />
+                    {user.name.first} {user.name.last}
+                  </td>
+                  <td>
+                    <FontAwesomeIcon icon={faPhoneSquareAlt} size="2x" />{" "}
+                    {user.phone}
+                    <br />
+                    <FontAwesomeIcon icon={faMobileAlt} size="2x" /> {user.cell}
+                    <br />
+                    <FontAwesomeIcon icon={faEnvelopeOpenText} size="2x" />{" "}
+                    {user.email}
+                  </td>
+                  <td>
+                    {user.location.city}, {user.location.state}
+                  </td>
+                  <td>{new Date(user.dob.date).toLocaleDateString()}</td>
+                  <td>{user.gender === "male" ? "he/him" : "she/her"}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </>
     );
   }
 }
